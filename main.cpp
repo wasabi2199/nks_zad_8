@@ -66,9 +66,31 @@ int SPN_keysched(uint32_t key, uint16_t key_exp[])
 
 uint16_t subst(uint16_t x)
 {
-    static uint16_t SB[] = { 5, 6, 2, 0, 7, 11,
+    /*static uint16_t SB[] = { 5, 6, 2, 0, 7, 11,
                              3, 15, 12, 1, 4,
-                             8, 9, 13, 10, 14};
+                             8, 9, 13, 10, 14};*/
+
+    //golden s-boxes
+    /*static uint16_t SB[] = { 0x0, 0x3, 0x5, 0x8,
+                             0x6, 0x9, 0xC, 0x7,
+                             0xD,0xA, 0xE, 0x4,
+                             0x1, 0xF, 0xB, 0x2};*/
+
+    /*static uint16_t SB[] = { 0x0, 0x3, 0x5, 0x8,
+                             0x6, 0xC, 0xB, 0x7,
+                             0x9,0xE, 0xA, 0xD,
+                             0xF, 0x2, 0x1, 0x4};*/
+
+    /*static uint16_t SB[] = { 0x0, 0x3, 0x5, 0x8,
+                             0x6, 0xA, 0xF, 0x4,
+                             0xE,0xD,0x9, 0x2,
+                             0x1,0x7, 0xC,0xB};*/
+
+    static uint16_t SB[] = { 0x0, 0x3, 0x5, 0x8,
+                             0x6, 0xC, 0xB, 0x7,
+                             0xA,0x4, 0x9,0xE,
+                             0xF, 0x1,0x2,0xD};
+
 
     uint16_t y = 0;
 
@@ -103,10 +125,10 @@ uint16_t transp_aes(uint16_t x)
     uint8_t a2 = (x & 0x00f0) >> 4;
     uint8_t a3 = (x & 0x000f) >> 0;
 
-    uint8_t b0 = GF_2_mult_tab[a0][aes_matrix[0][0]] + GF_2_mult_tab[a1][aes_matrix[1][0]] + GF_2_mult_tab[a2][aes_matrix[2][0]] + GF_2_mult_tab[a3][aes_matrix[3][0]];
-    uint8_t b1 = GF_2_mult_tab[a0][aes_matrix[0][1]] + GF_2_mult_tab[a1][aes_matrix[1][1]] + GF_2_mult_tab[a2][aes_matrix[2][1]] + GF_2_mult_tab[a3][aes_matrix[3][1]];
-    uint8_t b2 = GF_2_mult_tab[a0][aes_matrix[0][2]] + GF_2_mult_tab[a1][aes_matrix[1][2]] + GF_2_mult_tab[a2][aes_matrix[2][2]] + GF_2_mult_tab[a3][aes_matrix[3][2]];
-    uint8_t b3 = GF_2_mult_tab[a0][aes_matrix[0][3]] + GF_2_mult_tab[a1][aes_matrix[1][3]] + GF_2_mult_tab[a2][aes_matrix[2][3]] + GF_2_mult_tab[a3][aes_matrix[3][3]];
+    uint8_t b0 = GF_2_mult_tab[a0][aes_matrix[0][0]] + GF_2_mult_tab[a1][aes_matrix[0][1]] + GF_2_mult_tab[a2][aes_matrix[0][2]] + GF_2_mult_tab[a3][aes_matrix[0][3]];
+    uint8_t b1 = GF_2_mult_tab[a0][aes_matrix[1][0]] + GF_2_mult_tab[a1][aes_matrix[1][1]] + GF_2_mult_tab[a2][aes_matrix[1][2]] + GF_2_mult_tab[a3][aes_matrix[2][3]];
+    uint8_t b2 = GF_2_mult_tab[a0][aes_matrix[2][0]] + GF_2_mult_tab[a1][aes_matrix[2][1]] + GF_2_mult_tab[a2][aes_matrix[2][2]] + GF_2_mult_tab[a3][aes_matrix[3][3]];
+    uint8_t b3 = GF_2_mult_tab[a0][aes_matrix[3][0]] + GF_2_mult_tab[a1][aes_matrix[3][1]] + GF_2_mult_tab[a2][aes_matrix[3][2]] + GF_2_mult_tab[a3][aes_matrix[3][3]];
 
     y |= (b0 & 0xf) << 12;
     y |= (b1 & 0xf) << 8;

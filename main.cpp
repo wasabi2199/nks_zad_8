@@ -126,8 +126,8 @@ uint16_t transp_aes(uint16_t x)
     uint8_t a3 = (x & 0x000f) >> 0;
 
     uint8_t b0 = GF_2_mult_tab[a0][aes_matrix[0][0]] + GF_2_mult_tab[a1][aes_matrix[0][1]] + GF_2_mult_tab[a2][aes_matrix[0][2]] + GF_2_mult_tab[a3][aes_matrix[0][3]];
-    uint8_t b1 = GF_2_mult_tab[a0][aes_matrix[1][0]] + GF_2_mult_tab[a1][aes_matrix[1][1]] + GF_2_mult_tab[a2][aes_matrix[1][2]] + GF_2_mult_tab[a3][aes_matrix[2][3]];
-    uint8_t b2 = GF_2_mult_tab[a0][aes_matrix[2][0]] + GF_2_mult_tab[a1][aes_matrix[2][1]] + GF_2_mult_tab[a2][aes_matrix[2][2]] + GF_2_mult_tab[a3][aes_matrix[3][3]];
+    uint8_t b1 = GF_2_mult_tab[a0][aes_matrix[1][0]] + GF_2_mult_tab[a1][aes_matrix[1][1]] + GF_2_mult_tab[a2][aes_matrix[1][2]] + GF_2_mult_tab[a3][aes_matrix[1][3]];
+    uint8_t b2 = GF_2_mult_tab[a0][aes_matrix[2][0]] + GF_2_mult_tab[a1][aes_matrix[2][1]] + GF_2_mult_tab[a2][aes_matrix[2][2]] + GF_2_mult_tab[a3][aes_matrix[2][3]];
     uint8_t b3 = GF_2_mult_tab[a0][aes_matrix[3][0]] + GF_2_mult_tab[a1][aes_matrix[3][1]] + GF_2_mult_tab[a2][aes_matrix[3][2]] + GF_2_mult_tab[a3][aes_matrix[3][3]];
 
     y |= (b0 & 0xf) << 12;
